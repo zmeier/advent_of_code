@@ -3,12 +3,12 @@ const INPUT_FILE_PATH: &str = "src/bin/day1/input";
 fn main() {
     let lines = lib::lines_from_file(INPUT_FILE_PATH).expect("Could not load input data");
     println!("Part 1");
-    part1(lines.clone());
+    part1(&lines);
     println!("Part 2");
-    part2(lines.clone());
+    part2(&lines);
 }
 
-fn part1(lines: Vec<String>) {
+fn part1(lines: &Vec<String>) {
     let mut output = 0;
 
     for depth_index in 1..lines.len() {
@@ -19,13 +19,12 @@ fn part1(lines: Vec<String>) {
         }
     }
 
-    println!("Total depth changes: [{}]", output);
+    println!("{}", output);
 }
 
-fn part2(lines: Vec<String>) {
-    let mut output = 0;
-
+fn part2(lines: &Vec<String>) {
     let mut merged_depths = Vec::new();
+    
     for depth_index in 0..lines.len() {
         let depth = lines[depth_index].parse::<i32>().unwrap();
         merged_depths.push(depth);
@@ -36,6 +35,8 @@ fn part2(lines: Vec<String>) {
         }
     }
 
+    let mut output = 0;
+
     for depth_index in 1..merged_depths.len() {
         let previous_depth = &merged_depths[depth_index - 1];
         let depth = &merged_depths[depth_index];
@@ -45,5 +46,5 @@ fn part2(lines: Vec<String>) {
         }
     }
 
-    println!("Total depth changes: [{}]", output);
+    println!("{}", output);
 }
